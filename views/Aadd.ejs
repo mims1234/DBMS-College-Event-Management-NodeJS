@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Area | Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
+    <style>
+        .hide-button-bar {
+          display: none;
+        }
+      </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" style= "margin-top:18px ;" href="">College Event Management Project</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a style="font-size: large; margin-top:18px;">Organization: <%=userOrganizer%></a></li>
+                <li><a style="font-size: large; margin-top:18px;">Username: <%=userName%></a></li>
+                <li>              
+                  <form action="logout" method= "POST">
+                    <button type="submit" class="btn btn-sm btn-info add-btn-pad nav-btn" style= "margin-top:18px ; background-color: red;">Logout</button>
+                  </form>
+              </li>
+              </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <header id="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <h1> Add Event<small></small></h1>
+          </div>
+          <div class="col-md-2">
+              <form action="adminevents" method= "POST"><button type="submit" class="btn btn-sm btn-info add-btn-pad" style="margin-top: 18px;">Back</button></form>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              <div class="panel-heading main-color-bg">
+                <h3 class="panel-title">Add Page</h3>
+              </div>
+              <div class="panel-body">
+                <form action="authadd" method="POST">
+                  <div class="form-group">
+                    <label>Event Title</label>
+                    <input type="text" name="eventname" style="max-width: 300px;" class="form-control" placeholder="Event Title" value="<%=result.EVname%>">
+                  </div>
+                  <div class="form-group">
+                    <label>Description<small>  (200 characters limit) </small></label>
+                    <textarea name="eventdesc" style="max-width: 300px;" maxlength="200" onKeyDown="limitText(this,200);" onKeyUp="limitText(this,200);"class="form-control page-body" placeholder="Description">
+                        <%=result.EVdesc%>
+                    </textarea>
+                  </div>
+                  <div class="form-group">
+                      <label>Venue</label>
+                      <input type="text" name="eventvenue" style="max-width: 300px;" class="form-control" placeholder="Event Venue" value="<%=result.EVvenue%>">
+                    </div>
+                  <div class="form-group">
+                      <label>Participants Limit</label>
+                      <input type="number" name="eventcountmax" style="max-width: 300px;" class="form-control" placeholder="Event Participants Limit" value="<%=result.EVcountMax%>">
+                    </div>
+                      <div class="form-group">
+                          <label>Department :</label><br>
+                          <select name="eventdept" placeholder="Select" class="btn btn-primary dropdown-toggle" value="" required>
+                              <option value="All">All</option>
+                              <option value="CSE">CSE</option>
+                              <option value="CIV">CIV</option>
+                              <option value="ECE">ECE</option>
+                              <option value="MECH">MECH</option>
+                              <option value="EEE">EEE</option>
+                          </select>
+                        </div>
+                  <div class="form-group">
+                      <label>Event Type :</label><br>
+                      <select name="eventtype" placeholder="Select" class="btn btn-primary dropdown-toggle" value="" required>
+                          <option value="Science">Science</option>
+                          <option value="Culture">Culture</option>
+                          <option value="Technical">Technical</option>
+                          <option value="Fictional">Fictional</option>
+                          <option value="Classical">Classical</option>
+                      </select>
+                    </div>
+                    <% DOT = result.EVdate%>
+                  <div class="form-group">
+                      <label>Event Date</label>
+                      <input type="datetime-local" data-date="" data-date-format="DD MMMM YYYY" name="eventdate" style="max-width: 300px;" class="form-control" placeholder="Event Date" value="<%= DOT %>">
+                    </div>
+                  <input type="submit" class="btn btn-default" value="Add">
+                </form>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="footer">
+      <p>Copyright AdminStrap, &copy; 2017</p>
+    </footer>
+
+    <!-- Modals -->
+
+    <!-- Add Page -->
+    <div class="modal fade" id="addPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Page</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Page Title</label>
+          <input type="text" class="form-control" placeholder="Page Title">
+        </div>
+        <div class="form-group">
+          <label>Page Body</label>
+          <textarea name="editor1" class="form-control" placeholder="Page Body"></textarea>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Published
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Meta Tags</label>
+          <input type="text" class="form-control" placeholder="Add Some Tags...">
+        </div>
+        <div class="form-group">
+          <label>Meta Description</label>
+          <input type="text" class="form-control" placeholder="Add Meta Description...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+  <script>
+     CKEDITOR.replace( 'editor1' );
+ </script>
+
+ <script>
+   $("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+
+   function limitText(limitField, limitNum) {
+                  if (limitField.value.length > limitNum) {
+                      limitField.value = limitField.value.substring(0, limitNum);
+                  }
+                }
+ </script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

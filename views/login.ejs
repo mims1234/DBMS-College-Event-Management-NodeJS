@@ -1,0 +1,70 @@
+<% include partials/header.ejs %>
+<link rel ="stylesheet" href= "/css/login.css?version=1">
+</head>
+
+<style>
+    .img {
+        position: absolute;
+    }
+</style>
+<body>    
+        <div class = "hero">
+                <h1>College Event Management System</h1>
+        <div class = "form-box">
+                <div class = "button-box">
+                        <div id = "btn"></div>
+                        <button type="button" class="toggle-btn" onclick="log()">Login</button>
+                        <button type="button" class="toggle-btn" onclick="reg()">Register</button>
+                </div>
+                    <form id="login" class="input-group" action="auth" method="POST">
+                        <input value = "" type="text" name = "username" class = "input-field" placeholder= "Username" >
+                        <input value = "" type="password" name = "password" class = "input-field" placeholder= "Password" >
+                        <button type="submit" class = "submit-btn">Login</button>
+                        <% if (loginMSG != '') { %>
+                            <p class="text-center text-danger"><%= loginMSG %></p>
+                        <% } %>
+                    </form>
+                        <p class="text-center text-danger"><%= regMSG %></p>
+                    <form id="register" class="input-group" action="reg" method="POST">
+                        <input type="text" name = "username" class = "input-field" placeholder= "Username" required>
+                        <input type="password" name = "password" class = "input-field" placeholder= "Password" required>
+                        <input type="text" name = "name" class = "input-field" placeholder= "Name" required>
+                        <input type="text" name = "dept" class = "input-field" placeholder= "Department" required>
+                        <button type="submit" class = "submit-btn">Sign Up</button>
+                        <% if (regMSG != '') { %>
+                            <style>
+                                #login {
+                                    left:-400px;
+                                }
+
+                                #register {
+                                    left: 50px;
+                                }
+
+                                #btn {
+                                    left: 110px;
+                                }
+                            </style>
+                        <% } %>
+                    </form>
+            </div>
+        </div> 
+        <script>
+                var login = document.getElementById("login");
+                var register = document.getElementById("register");
+                var btn = document.getElementById("btn");
+
+                function reg() {
+                    login.style.left = "-400px";
+                    register.style.left = "50px";
+                    btn.style.left = "110px";
+                }
+
+                function log() {
+                    login.style.left = "50px";
+                    register.style.left = "450px";
+                    btn.style.left = "0px";
+                }
+        </script>
+</body>
+</html>

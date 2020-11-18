@@ -1,0 +1,103 @@
+*{
+    box-sizing: border-box;
+}
+nav
+{
+display: flex;
+justify-content: space-around;
+align-items: center;
+min-height: 8v;
+background-color:brown;
+font-family: 'Poppins', sans-serif;
+}
+.logo{
+    color: rgb(226, 226,226);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 50px;
+}
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+.nav-links li{
+list-style: none;
+}
+.nav-links a{
+    color: rgb(226, 226,226);
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.buzz{
+    display: none;
+}
+.buzz div{
+    width: 25px;
+    height: 3px;
+    background-color: rgb(226, 226,226);
+    margin: 5px;
+}
+
+body{
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    background: grey;
+}
+
+
+.main-container {
+    max-width: 1800px;
+    background: #fff;
+    margin: 40px auto 0 auto;
+    line-height: 1.65;
+    padding: 20px 50px;
+    display: flex;
+}
+
+.main-box {
+    flex: 6;
+    order: 2;
+}
+
+.filter-box {
+    flex: 1;
+    order: 1;
+}
+
+.main-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius:  15px 15px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.main-table thead tr {
+    background-color: brown;
+    color:white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.main-table th,
+.main-table td {
+    padding: 12px 15px;
+}
+
+.main-table tbody tr{
+    border-bottom: 1px solid lightgrey;
+}
+
+.main-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.main-table tbody tr:last-of-type { 
+    border-bottom: 2px solid brown;
+}
